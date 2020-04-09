@@ -98,7 +98,7 @@ hi Search cterm=bold ctermbg=Magenta
 set ignorecase
 set smartcase  " only do case sensitive if a capital is present
 set incsearch
-set hlsearch
+set hlsearch   " Highlight everything that matches a search
 set history=50
 set nowrap
 set showmatch
@@ -106,6 +106,14 @@ set showmatch
 set backspace=indent,eol,start  " What to backspace through..
 
 set errorformat=%f:%l:%c\ %m
+
+" Highlight certain unwelcome characters, such as tabs, trailing whitespace, etc
+exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:\u02FD"
+set list
+
+" Warn if we're going wider than 80 characters by highlighting when you go too far
+highlight ColorColumn ctermbg=red
+call matchadd('ColorColumn', '\%81v', 100)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " My functions
@@ -145,6 +153,8 @@ augroup END
 " My key mappings
 " Available keys seem to be:  \ | ~ ` &
 map Y y$
+nnoremap ; :
+
 " Cancel search highlighting with \\
 nnoremap <Leader>\ :noh<CR>:<backspace>
 nnoremap <Leader>o <C-w>o
@@ -180,3 +190,24 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 " ^X^O gives you pop-up context-sensitive completions
 nnoremap <Leader>T :MerlinTypeOf<CR>
 inoremap <C-X><C-T> <Esc>:MerlinTypeOf<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Abstract interpretation symbols
+function Absint_keys()
+    iab join@ <C-V>u2294
+    iab meet@ <C-V>u2293
+    iab le@ <C-V>u2291
+    iab ge@ <C-V>u2292
+    iab top@ <C-V>u22a4
+    iab bot@ <C-V>u22a5
+    iab rarrow@ <C-V>u2192
+    iab larrow@ <C-V>u2190
+    iab widen@ <C-V>u2207
+    iab narrow@ <C-V>u2206
+    iab empty@ <C-V>u2205
+    iab element@ <C-V>u2208
+    iab forall@ <C-V>u2200
+    iab exists@ <C-V>u2203
+    iab turn@ <C-V>u22a6
+endfunction
+nnoremap <Leader>@ :silent :call Absint_keys()<CR>
