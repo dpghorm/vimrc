@@ -74,24 +74,21 @@ silent! cs add cscope.out
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " My settings
 
-syntax enable
+syntax enable   " Enable syntax highlighting
 " filetypes
 filetype plugin on
 filetype indent on
-set number
+set number      " Show line numbers
 set wildchar=<Tab> wildmenu wildmode=longest:full,full
 set laststatus=2
 " hi StatusLine cterm=bold ctermfg=Yellow ctermbg=DarkRed
 " hi StatusLineNC cterm=bold ctermfg=Black ctermbg=DarkGray
 
-set expandtab
-set softtabstop=4
-set shiftwidth=4
-set smarttab
-set noautoindent
-set cinw=
-set cink=
-" set tabstop=4
+set expandtab   " insert spaces instead of tabs
+set softtabstop=2
+set shiftwidth=2
+set smarttab    " tab at the start of the line obeys indent, not tabstops
+set tabstop=4
 set showcmd
 set guicursor=n-v-c:block-blinkon100-blinkoff100
 hi Search cterm=bold ctermbg=Magenta
@@ -209,5 +206,6 @@ function Absint_keys()
     iab forall@ <C-V>u2200
     iab exists@ <C-V>u2203
     iab turn@ <C-V>u22a6
+    echo "Installed abbreviations@ for absint symbols"
 endfunction
 nnoremap <Leader>@ :silent :call Absint_keys()<CR>
