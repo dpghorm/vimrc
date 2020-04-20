@@ -16,7 +16,7 @@ exec pathogen#infect()
 
 " Note that after adding a new plugin to our setup, just run
 " the following (provided by Pathogen) to reindex the docs:
-" :Helptabs
+" :Helptags
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Streamline the GUI
@@ -38,6 +38,10 @@ else
         let g:airline#extensions#tabline#left_sep = ' '
         let g:airline#extensions#tabline#left_alt_sep = '|'
 endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntastic
+nnoremap <Leader>x :SyntasticCheck<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CtrlP - fuzzy buffer/window/file switching
@@ -180,13 +184,18 @@ endif
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OCaml support
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
-" Also run the following line in vim to index the documentation:
-"     :execute "helptags " . g:opamshare . "/merlin/vim/doc" 
-" ^X^O gives you pop-up context-sensitive completions
-nnoremap <Leader>T :MerlinTypeOf<CR>
-inoremap <C-X><C-T> <Esc>:MerlinTypeOf<CR>
+if filereadable("/usr/local/bin/opam")
+  let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+  execute "set rtp+=" . g:opamshare . "/merlin/vim"
+  " Also run the following line in vim to index the documentation:
+  "     :execute "helptags " . g:opamshare . "/merlin/vim/doc" 
+  " ^X^O gives you pop-up context-sensitive completions
+  " \t gives you the type of the selection
+  inoremap <C-X><C-T> <Esc>:MerlinTypeOf<CR>
+  " Need to tell Syntastic to use the Merlin syntax
+  let g:syntastic_ocaml_checkers = ['merlin']
+  " Tips:  when inserting, type <C-X><C-O> to see type-aware completion list
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Abstract interpretation symbols
