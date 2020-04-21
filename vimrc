@@ -173,8 +173,8 @@ nnoremap <C-p> :cprevious<CR>
 inoremap <C-o> <Esc>O
 
 " If we're in "view" mode, then quit on just "q"
-if &readonly == 1
-        map q :q<CR>
+if v:progname ==? 'view'
+  nnoremap q :q<CR>
 endif
 
 " Possible future stuff
