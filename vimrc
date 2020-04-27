@@ -109,7 +109,8 @@ set backspace=indent,eol,start  " What to backspace through..
 set errorformat=%f:%l:%c\ %m
 
 " Highlight certain unwelcome characters, such as tabs, trailing whitespace, etc
-exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:\u02FD"
+exec "set listchars=tab:\uBB\uB7,trail:\uB7,nbsp:\u02FD"
+highlight SpecialKey guifg=DarkGray ctermfg=DarkGray
 set list
 
 " Warn if we're going wider than 80 characters by highlighting when you go too far
