@@ -4,3 +4,5 @@ tcomment - Comments
 Airline - fancy modeline
 Vinegar - lightweight file browsing
 Syntastic - syntax highlighting
+vimTeX - syntax highlight, boundary definitions, and compilation/viewing of LaTeX files
+       - might need to do:  let g:tex_flavor = 'latex'
