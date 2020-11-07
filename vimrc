@@ -1,6 +1,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Doug's .vimrc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" echomsg "Do printf-style debugging with echomsg, followed by :messages"
 set nocompatible
 let mapleader="\\"
 
@@ -147,8 +148,8 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Auto commands
 augroup user
-autocmd!
-autocmd QuickFixCmdPost * copen
+  autocmd!
+  autocmd QuickFixCmdPost * copen
 augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -177,6 +178,34 @@ inoremap <C-o> <Esc>O
 if v:progname ==? 'view'
   nnoremap q :q<CR>
 endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vimwiki
+" Requires native fzf and ag:  brew install fzf ag  @ Not sure we need command
+" line fzf; maybe just fzf.vim
+let wiki_1 = {'path': '~/proj/zettelkasten', 'links_space_char': '-', 'path_html': '~/zk/', 'auto_generate_links': 1, 'auto_tags': 1, 'diary_rel_path': './', 'auto_diary_index': 1}
+let wiki_2 = {'path': '~/proj/pettelkasten', 'links_space_char': '-', 'path_html': '~/zk/', 'auto_generate_links': 1, 'auto_tags': 1, 'diary_rel_path': './', 'auto_diary_index': 1}
+
+let g:vimwiki_list = [wiki_1, wiki_2]
+let g:vimwiki_auto_header = 1
+let g:zettel_format = "%y%m%d-%H%M-%title"
+let g:zettel_options = [{"template": "~/proj/zettelkasten/00template.tpl"}, {"template": "~/proj/pettelkasten/00template.tpl"}]
+" let g:zettel_fzf_command = "ag --column --line-number --ignore-case --no-heading --color=always"
+" \ww - new wiki page
+" \w\w - go to today's diary entry
+" \wr - Rename wiki file you're in (but not Zettle %title)
+" <S-CR> - horizontal split and follow link
+" <C-CR> - vertical split and follow link
+" <Tab> - find the next link in the current page
+nnoremap <Leader>zn :ZettelNew<space>
+augroup zettelstuff
+  autocmd! 
+  autocmd FileType vimwiki nnoremap <buffer> <silent> <Leader>zo :ZettelOpen<CR>
+  autocmd FileType vimwiki nnoremap <buffer> <silent> <Leader>zi :ZettelInbox<CR>
+  autocmd FileType vimwiki nnoremap <buffer> <silent> <Leader>zb :ZettelBackLinks<CR>
+  autocmd FileType vimwiki nnoremap <buffer> <silent> <Leader>zl :ZettelGenerateLinks<CR>
+  autocmd FileType vimwiki nnoremap <buffer> <silent> <Leader>zt :VimwikiGenerateTagsLinks<space>
+augroup END
 
 " Possible future stuff
 " map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
@@ -219,3 +248,8 @@ function Absint_keys()
     echo "Installed abbreviations@ for absint symbols"
 endfunction
 nnoremap <Leader>@ :silent :call Absint_keys()<CR>
+
+" This is an exmple of a modeline.  Requires modelines>0
+set modeline
+set modelines=3
+" vim: tw=78:ts=2:nowrap
