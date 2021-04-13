@@ -172,7 +172,7 @@ nnoremap <Leader>* :silent :call SymbolSearch()<CR>
 nnoremap <C-n> :cnext<CR>
 nnoremap <C-p> :cprevious<CR>
 
-inoremap <C-o> <Esc>O
+"inoremap <C-o> <Esc>O
 
 " If we're in "view" mode, then quit on just "q"
 if v:progname ==? 'view'
@@ -216,11 +216,13 @@ augroup END
 " OCaml support
 if filereadable("/usr/local/bin/opam")
   let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-  execute "set rtp+=" . g:opamshare . "/merlin/vim"
+  execute "set rtp^=" . g:opamshare . "/merlin/vim"
+  execute "set rtp^=" . g:opamshare . "/ocp-indent/vim"
   " Also run the following line in vim to index the documentation:
   "     :execute "helptags " . g:opamshare . "/merlin/vim/doc" 
   " ^X^O gives you pop-up context-sensitive completions
   " \t gives you the type of the selection
+  " gd jumps to the definition of a function
   inoremap <C-X><C-T> <Esc>:MerlinTypeOf<CR>
   " Need to tell Syntastic to use the Merlin syntax
   let g:syntastic_ocaml_checkers = ['merlin']
