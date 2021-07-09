@@ -109,14 +109,33 @@ set backspace=indent,eol,start  " What to backspace through..
 
 set errorformat=%f:%l:%c\ %m
 
-" Highlight certain unwelcome characters, such as tabs, trailing whitespace, etc
-exec "set listchars=tab:\uBB\uB7,trail:\uB7,nbsp:\u02FD"
-highlight SpecialKey guifg=DarkGray ctermfg=DarkGray
+" These are unicode characters in hex for: https://unicodemap.org/range/2/Latin-1_Supplement/
+let indentLine_char="\u22ee"
+let g:indentLine_color_term = 233
+
+" It is the indentLine package that shows us the fake tab vertical bars, even
+" when indenting with spaces.
+" https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
+
+" " Highlight certain unwelcome characters, such as tabs, trailing whitespace, etc
+" You can run :digraph to see the options:
+"   \xB7 (183) is a small dot in the center
+"   \xBB (187) is a double right arrow character
+"   \xA6 (166) is a vertical bar
+"   \u22ee (8942) is triple vertical dots
+"   \u02fd is a small square cup
+" exec "set listchars=tab:\uBB\uB7,trail:\uB7,nbsp:\u02FD"
+set listchars="tab:\uBB\uB7,trail:\uB7,nbsp:\u02FD"
+highlight SpecialKey guifg=DarkGray ctermfg=235
+highlight LineNr ctermfg=235
 set list
 
-" Warn if we're going wider than 80 characters by highlighting when you go too far
-highlight ColorColumn ctermbg=red
-call matchadd('ColorColumn', '\%81v', 100)
+"
+" " Warn if we're going wider than 80 characters by highlighting when you go too far
+" TODO We should set this up to toggle on/off when we hit <Leader>R or something
+" like that
+" highlight ColorColumn ctermbg=red
+" call matchadd('ColorColumn', '\%81v', 100)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " My functions
@@ -184,15 +203,15 @@ endif
 " Requires native fzf and ag:  brew install fzf ag  @ Not sure we need command
 " line fzf; maybe just fzf.vim
 let wiki_1 = {'path': '~/proj/zettelkasten', 'links_space_char': '-', 'path_html': '~/zk/', 'auto_generate_links': 1, 'auto_tags': 1, 'diary_rel_path': './', 'auto_diary_index': 1}
-let wiki_2 = {'path': '~/proj/pettelkasten', 'links_space_char': '-', 'path_html': '~/zk/', 'auto_generate_links': 1, 'auto_tags': 1, 'diary_rel_path': './', 'auto_diary_index': 1}
 
-let g:vimwiki_list = [wiki_1, wiki_2]
+let g:vimwiki_list = [wiki_1]
 let g:vimwiki_auto_header = 1
 let g:zettel_format = "%y%m%d-%H%M-%title"
-let g:zettel_options = [{"template": "~/proj/zettelkasten/00template.tpl"}, {"template": "~/proj/pettelkasten/00template.tpl"}]
+let g:zettel_options = [{"template": "~/proj/zettelkasten/00template.tpl"}]
 " let g:zettel_fzf_command = "ag --column --line-number --ignore-case --no-heading --color=always"
 " \ww - new wiki page
 " \w\w - go to today's diary entry
+" [[ - insert a link to a wiki page (zettel); it will help you search
 " \wr - Rename wiki file you're in (but not Zettle %title)
 " <S-CR> - horizontal split and follow link
 " <C-CR> - vertical split and follow link
