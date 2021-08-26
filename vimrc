@@ -224,6 +224,7 @@ augroup zettelstuff
   autocmd FileType vimwiki nnoremap <buffer> <silent> <Leader>zb :ZettelBackLinks<CR>
   autocmd FileType vimwiki nnoremap <buffer> <silent> <Leader>zl :ZettelGenerateLinks<CR>
   autocmd FileType vimwiki nnoremap <buffer> <silent> <Leader>zt :VimwikiGenerateTagsLinks<space>
+  nnoremap <Leader>zz :edit proj/zettelkasten/index.wiki<CR>
 augroup END
 
 " Possible future stuff
