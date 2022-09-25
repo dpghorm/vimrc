@@ -219,6 +219,7 @@ let g:zettel_options = [{"template": "~/proj/zettelkasten/00template.tpl"}]
 nnoremap <Leader>zn :ZettelNew<space>
 augroup zettelstuff
   autocmd! 
+  autocmd FileType vimwiki nnoremap <buffer> <silent> <Leader><space> :VimwikiToggleListItem<CR>
   autocmd FileType vimwiki nnoremap <buffer> <silent> <Leader>zo :ZettelOpen<CR>
   autocmd FileType vimwiki nnoremap <buffer> <silent> <Leader>zi :ZettelInbox<CR>
   autocmd FileType vimwiki nnoremap <buffer> <silent> <Leader>zb :ZettelBackLinks<CR>
