@@ -95,7 +95,7 @@ set shiftwidth=2
 set smarttab    " tab at the start of the line obeys indent, not tabstops
 set tabstop=4
 set showcmd
-set guicursor=n-v-c:block-blinkon100-blinkoff100
+set guicursor=n-v-c:block-blinkon500-blinkoff500
 hi Search cterm=bold ctermbg=Magenta
 set ignorecase
 set smartcase  " only do case sensitive if a capital is present
@@ -110,7 +110,8 @@ set backspace=indent,eol,start  " What to backspace through..
 set errorformat=%f:%l:%c\ %m
 
 " These are unicode characters in hex for: https://unicodemap.org/range/2/Latin-1_Supplement/
-let indentLine_char="\u22ee"
+" let indentLine_char="\u22ee"
+let indentLine_char="|"
 let g:indentLine_color_term = 233
 
 " It is the indentLine package that shows us the fake tab vertical bars, even
@@ -216,6 +217,7 @@ let g:zettel_options = [{"template": "~/proj/zettelkasten/00template.tpl"}]
 " <S-CR> - horizontal split and follow link
 " <C-CR> - vertical split and follow link
 " <Tab> - find the next link in the current page
+" @@@ TODO - should create a \zt - only search for titles (if available)
 nnoremap <Leader>zn :ZettelNew<space>
 augroup zettelstuff
   autocmd! 

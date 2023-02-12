@@ -7,4 +7,5 @@ Vinegar - lightweight file browsing
 Syntastic - syntax highlighting
 vimTeX - syntax highlight, boundary definitions, and compilation/viewing of LaTeX files
        - might need to do:  let g:tex_flavor = 'latex'
-vimwiki - support for wikis; I'm trying it out as my Zettelkasten
+vimwiki - support for wikis (https://github.com/vimwiki)
+vim-zettel-master - I'm trying it out as my Zettelkasten (https://github.com/michal-h21/vim-zettel)
