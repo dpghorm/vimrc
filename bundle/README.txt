@@ -9,3 +9,6 @@ vimTeX - syntax highlight, boundary definitions, and compilation/viewing of LaTe
        - might need to do:  let g:tex_flavor = 'latex'
 vimwiki - support for wikis (https://github.com/vimwiki)
 vim-zettel-master - I'm trying it out as my Zettelkasten (https://github.com/michal-h21/vim-zettel)
+Rust: (see https://blog.logrocket.com/configuring-vim-rust-development/)
+  rust.vim - 
+  coc - 

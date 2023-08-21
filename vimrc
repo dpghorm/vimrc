@@ -89,6 +89,41 @@ set laststatus=2
 " hi StatusLine cterm=bold ctermfg=Yellow ctermbg=DarkRed
 " hi StatusLineNC cterm=bold ctermfg=Black ctermbg=DarkGray
 
+" word-break wrapping with indenting
+let s:wrapenabled = 0
+function! ToggleWrap()
+  if s:wrapenabled
+    set nowrap
+    set nolinebreak
+    set formatoptions-=l
+    set nobreakindent
+    unmap j
+    unmap k
+    unmap 0
+    unmap ^
+    unmap $
+    let s:wrapenabled = 0
+  else
+    set wrap
+    set linebreak
+    set formatoptions+=l
+    set breakindent
+    nnoremap j gj
+    nnoremap k gk
+    nnoremap 0 g0
+    nnoremap ^ g^
+    nnoremap $ g$
+    vnoremap j gj
+    vnoremap k gk
+    vnoremap 0 g0
+    vnoremap ^ g^
+    vnoremap $ g$
+    let s:wrapenabled = 1
+  endif
+endfunction
+map <leader>w :call ToggleWrap()<CR>
+
+
 set expandtab   " insert spaces instead of tabs
 set softtabstop=2
 set shiftwidth=2
@@ -278,3 +313,18 @@ nnoremap <Leader>@ :silent :call Absint_keys()<CR>
 set modeline
 set modelines=3
 " vim: tw=78:ts=2:nowrap
+
+" stop CoC by default (but Coc is enabled)
+let g:coc_start_at_startup=0
+" manually start CoC
+nmap <leader>cc :<C-u>CocStart<CR>
+" manually stop CoC
+
+" Rust support package:  coc and rust
+" COC colors
+hi CocFloating ctermfg=black ctermbg=22
+hi CocPumDetail ctermfg=221 ctermbg=22
+" CocUnusedHighlight -- variables which aren't used?
+hi CocInlayHint guibg=#004040
+hi CocInlayHintType guibg=#004040
+hi CocInlayHintParameter guibg=#004000
