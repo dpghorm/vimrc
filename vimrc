@@ -108,6 +108,10 @@ function! ToggleWrap()
     set linebreak
     set formatoptions+=l
     set breakindent
+    "set breakindentopt=shift:2,sbr
+    set breakindentopt=sbr,list:-1
+    "set formatlistpat=
+    set showbreak=⇒
     nnoremap j gj
     nnoremap k gk
     nnoremap 0 g0
