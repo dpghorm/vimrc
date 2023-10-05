@@ -647,7 +647,7 @@ function! vimwiki#vars#populate_syntax_vars(syntax) abort
   let g:vimwiki_syntax_variables[a:syntax].rxListItem =
         \ g:vimwiki_syntax_variables[a:syntax].rxListItemWithoutCB
         \ . '\+\%(\[\(['.vimwiki#vars#get_global('listsyms')
-        \ . vimwiki#vars#get_global('listsym_rejected').']\)\]\s\)\?'
+        \ . vimwiki#vars#get_global('listsym_rejected').']\s*\)\]\s\)\?'
   if g:vimwiki_syntax_variables[a:syntax].recurring_bullets
     let g:vimwiki_syntax_variables[a:syntax].rxListItemAndChildren =
           \ '^\('.g:vimwiki_syntax_variables[a:syntax].rxListBullet.'\)\s\+\[['
